@@ -270,6 +270,30 @@ class Client:
             "POST", route, json={"tweet_id": str(tweet_id)}, user_auth=True
         )[0]["liked"]
 
+    def liking_users(self, tweet_id):
+        """Like a Tweet.
+
+        Parameters
+        ----------
+        tweet_id : Union[int, str]
+            The ID of the Tweet that you would get the liking users.
+
+        Returns
+        -------
+        bool
+            Indicates whether the user likes the specified Tweet as a result of
+            this request.
+
+        References
+        ----------
+        https://developer.twitter.com/en/docs/twitter-api/tweets/likes/api-reference/get-tweets-id-liking_users
+        """
+        route = f"/2/tweets/{tweet_id}/liking_users"
+
+        return self._make_request(
+            "GET", route, data_type=User
+        )
+
     # Search Tweets
 
     def search_all_tweets(self, query, **params):
